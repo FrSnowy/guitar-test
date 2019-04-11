@@ -3,6 +3,7 @@ import { AsyncStorage } from 'react-native';
 import Welcome from './screens/Welcome/Welcome';
 import constants from './constants';
 import Search from './screens/Search/Search';
+import Saved from './screens/Saved/Saved';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -17,17 +18,21 @@ export default class App extends React.Component {
   }
 
   async componentDidMount() {
-    const savedResults = JSON.parse(await AsyncStorage.getItem('SAVED_RESULTS')) || { };
+    const savedResults = JSON.parse(
+      await AsyncStorage.getItem(constants.STORAGE),
+    ) || { };
     if (!Object.keys(savedResults)) {
-      await AsyncStorage.setItem('SAVED_RESULTS', JSON.stringify({ }));
+      await AsyncStorage.setItem(constants.STORAGE, JSON.stringify({ }));
     }
     this.setState({ savedResults });
   }
 
   async saveResult(key, result) {
-    const currentStorage = JSON.parse(await AsyncStorage.getItem('SAVED_RESULTS')) || { };
+    const currentStorage = JSON.parse(
+      await AsyncStorage.getItem(constants.STORAGE),
+    ) || { };
     currentStorage[key] = result;
-    await AsyncStorage.setItem('SAVED_RESULTS', JSON.stringify(currentStorage));
+    await AsyncStorage.setItem(constants.STORAGE, JSON.stringify(currentStorage));
 
     this.setState({
       savedResults: currentStorage,
@@ -57,6 +62,14 @@ export default class App extends React.Component {
             saveResult={this.saveResult}
             isResultSaved={this.isResultSaved}
             savedResults={savedResults}
+          />
+        );
+      case constants.views.saved:
+        return (
+          <Saved
+            savedResults={savedResults}
+            isResultSaved={this.isResultSaved}
+            saveResult={this.saveResult}
           />
         );
       default: return null;

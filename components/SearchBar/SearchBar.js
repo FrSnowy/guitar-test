@@ -3,6 +3,8 @@ import React from 'react';
 import { View, TextInput } from 'react-native';
 import style from './SearchBar.style';
 import ClickableImage from '../ClickableImage/ClickableImage';
+import saveIcon from '../../assets/save.png';
+import constants from '../../constants';
 
 export default function ViewHeader(props) {
   const {
@@ -10,6 +12,7 @@ export default function ViewHeader(props) {
     search,
     icon,
     changeSearchingText,
+    changeView,
   } = props;
 
   return (
@@ -21,7 +24,12 @@ export default function ViewHeader(props) {
         value={searchingText || ''}
         onEndEditing={search}
       />
-      <ClickableImage source={icon} onPress={search} />
+      <ClickableImage source={icon} onPress={search} right={20} />
+      <ClickableImage
+        source={saveIcon}
+        onPress={() => { changeView(constants.views.saved); }}
+        right={70}
+      />
     </View>
   );
 }

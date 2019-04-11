@@ -5,7 +5,7 @@ import ResultView from '../ResultView/ResultView';
 import style from './SearchResults.style';
 
 export default function SearchResults(props) {
-  const { results, saveResult, isResultSaved } = props;
+  const { results, isResultSaved } = props;
 
   return (
     <FlatList
@@ -17,7 +17,7 @@ export default function SearchResults(props) {
           <ResultView
             name={result.name}
             img={result.image}
-            saveResult={saveResult}
+            saveResult={() => { }}
             isResultSaved={isResultSaved}
           />
         )

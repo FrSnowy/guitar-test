@@ -38,8 +38,8 @@ export default class Search extends React.Component {
 
     if (searchingText === prevSearchingText || isInSearch) return false;
 
-    const key = 'BJupdNJgPNueXIbJiNvs';
-    const secret = 'WCRvCNDZtdqyrRPijpUutMWoHTrFHHFK';
+    const key = 'BJupdNJgPNueXIbJiNvs'; //! На продакшене вынести в .env
+    const secret = 'WCRvCNDZtdqyrRPijpUutMWoHTrFHHFK'; //! На продакшене вынести в .env
     const URL = 'https://api.discogs.com/database/search';
     const artistName = searchingText;
 
@@ -75,7 +75,7 @@ export default class Search extends React.Component {
       searchingText, title, links, results, isInSearch,
     } = this.state;
 
-    const { saveResult, isResultSaved } = this.props;
+    const { saveResult, isResultSaved, changeView } = this.props;
 
     return (
       <View style={style.container}>
@@ -84,6 +84,7 @@ export default class Search extends React.Component {
           icon={isInSearch ? preloader : search}
           searchingText={searchingText}
           search={this.search}
+          changeView={changeView}
           changeSearchingText={this.changeSearchingText}
         />
         <SearchResults

@@ -7,7 +7,7 @@ const style = {
     fontSize: 18,
     color: 'white',
     marginLeft: 24,
-    marginRight: 84,
+    marginRight: 136,
     borderBottomWidth: 1,
     borderBottomColor: 'white',
     textDecorationColor: 'transparent',
